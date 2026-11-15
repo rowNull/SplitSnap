@@ -1,3 +1,5 @@
 Personal items: e.g. clothes, alcohol, beauty products, medicine/vitamins
 
-shared items: e.g. groceries, toilet papers, paper towels, cleaning supplies, fees & taxes, snacks, softdrinks
+shared items: e.g. groceries, toilet papers, paper towels, cleaning supplies, snacks, softdrinks
+
+CRV goes to the same category as the drink is charged for. All other fees and taxes are shared

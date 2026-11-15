@@ -46,11 +46,13 @@ def read_receipt(image_bytes, mime_type):
         mime_type=mime_type
     )
 
-    prompt = f"Extract the store name, total, tax, last 4 card digits and every line item with its price from this receipt. Do not include tax as a line item. For each item, also give a clean readable name and a category of shared or personal, following these house rules: {rules}"
+    prompt = f"Extract the store name, total, tax, last 4 card digits and every line item with its price from this receipt. Do not include tax as a line item. List every printed line as its own item, including fees like CRV. Never combine lines. For each item, also give a clean readable name and a category of shared or personal, following these house rules: {rules}"
 
 
     # using the flash model since it is the fastest and cheapest for testing
-    response = client.models.generate_content(model="gemini-3.5-flash-lite", contents=[image_part, prompt], config=types.GenerateContentConfig(response_mime_type="application/json", response_schema=Receipt))
+    response = client.models.generate_content(model="gemini-3.5-flash-lite", contents=[image_part, prompt], config=types.GenerateContentConfig(response_mime_type="application/json", response_schema=Receipt, temperature=0))
 
-    return response.parsed
+    receipt = response.parsed
+    receipt.store = receipt.store.capitalize()
+    return receipt
 
